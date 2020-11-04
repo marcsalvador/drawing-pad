@@ -1,0 +1,88 @@
+<div class="canvas-wrapper input-draw-container">
+    <div class="canvas-navigation">
+        <ul>
+            <li>
+                <button [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor"
+                    (click)="clearCanvas()" [innerHTML]="clearButtonText">
+                    <!-- <i class="fas fa-times"></i> -->
+                </button>
+                <button *ngIf="showSaveTool"  [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor" title="Save"
+                    (click)="saveImage()" [innerHTML]="saveButtonText">
+                    <!-- <i class="fas fa-save"></i> -->
+                </button>
+                <button *ngIf="showLoadTool"  [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor" title="Save"
+                    (click)="loadImage()" [innerHTML]="loadButtonText">
+                    <!-- <i class="fas fa-save"></i> -->
+                </button>
+                <button *ngIf="showCaptureTool" [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor" title="Save"
+                    (click)="captureImage()" [innerHTML]="captureButtonText">
+                    <!-- <i class="fas fa-save"></i> -->
+                </button>
+            </li>
+            <li *ngIf="showUndoRedoTool">
+                <button [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor" title="Undo"
+                    (click)="undo()" [innerHTML]="undoButtonText">
+                    <!-- <i class="fas fa-undo"></i> -->
+                </button>
+                <button [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor" title="Redo"
+                    (click)="redo()" [innerHTML]="redoButtonText">
+                    <!-- <i class="fas fa-redo"></i> -->
+                </button>
+            </li>
+            <li *ngIf="showZoom">
+                <button class="nav-group-header" type="button">Zoom</button>
+                <button [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor"
+                    title="Zoom Out" (click)="zoomOut()" [innerHTML]="zoomOutButtonText">
+                    <!-- <i class="fas fa-search-minus"></i> -->
+                </button>
+                <button [class]="clearButtonClass" type="button" [style]="'color:'+clearButtonFontColor" title="Zoom In"
+                    (click)="zoomIn()" [innerHTML]="zoomInButtonText">
+                    <!-- <i class="fas fa-search-plus"></i> -->
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="canvas-container" [ngClass]="{'has-error':_ISDIRTY}" #canvasContainer [ngStyle]="{'height': containerHeight, 'width': containerWidth}">
+        <div class="status">
+            <div class="message" [innerHTML]="loadingMessage"></div>
+            <div class="zoom" *ngIf="showZoom">{{scale*100 | number:'2.0'}}%</div>
+        </div>
+    </div>
+    <div class="canvas-navigation" *ngIf="showEraserTool || showMarkerOptions">
+        <ul>
+            <li>
+                <button *ngIf="showMarkerOptions"  class="nav-group-header" type="button">Marker</button>
+                <button *ngIf="showMarkerOptions"  [class]="clearButtonClass" type="button"
+                    [ngClass]="{'' : enableSolidMarker!==true,'selected': enableSolidMarker===true}"
+                    [style]="'color:'+clearButtonFontColor" (click)="enableSolidMarkerClick()"
+                    [innerHTML]="solidMarkerButtonText">
+                </button>
+                <button *ngIf="showMarkerOptions"  [class]="clearButtonClass" type="button"
+                    [ngClass]="{'' : enableDashMarker!==true,'selected': enableDashMarker===true}"
+                    [style]="'color:'+clearButtonFontColor" (click)="enableDashMarkerClick()"
+                    [innerHTML]="dashMarkerButtonText">
+                </button>
+                <button *ngIf="showMarkerOptions"  [class]="clearButtonClass" type="button"
+                    [ngClass]="{'' : enableDotMarker!==true,'selected': enableDotMarker===true}"
+                    [style]="'color:'+clearButtonFontColor" (click)="enableDotMarkerClick()"
+                    [innerHTML]="dotMarkerButtonText">
+                </button>
+                <div *ngIf="showMarkerOptions"  class="colorContainer">
+                    <ul class="colorList">
+                        <li [ngStyle]="{'background-color': '#000'}" (click)="setMarkerColor('#000')"></li>
+                        <li [ngStyle]="{'background-color': '#555'}" (click)="setMarkerColor('#555')"></li>
+                        <li [ngStyle]="{'background-color': '#999'}" (click)="setMarkerColor('#999')"></li>
+                        <li *ngFor="let item of colors;" [ngStyle]="{'background-color': item}"
+                            (click)="setMarkerColor(item)">
+                        </li>
+                    </ul>
+                </div>
+                <button *ngIf="showEraserTool" [class]="clearButtonClass" type="button"
+                    [ngClass]="{'' : enableEraserTool!==true,'selected': enableEraserTool===true}"
+                    [style]="'color:'+clearButtonFontColor" (click)="enableEraserToolClick()"
+                    [innerHTML]="eraserToolButtonText">
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,3 +1,6 @@
+declare const require: any;
+
 export const environment = {
-  production: true
+  production: true,
+  package: require('../../package.json')
 };

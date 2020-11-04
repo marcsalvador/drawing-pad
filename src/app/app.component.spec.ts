@@ -19,7 +19,6 @@ describe('AppComponent', () => {
   it(`should have as title 'mscode-input-draw'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('mscode-input-draw');
   });
 
   it('should render title', () => {
