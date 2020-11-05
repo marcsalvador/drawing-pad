@@ -2,6 +2,7 @@
   "name": "drawing-pad",
   "version": "1.0.0",
   "homepage": "http://marcsalvador.github.io/drawing-pad",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

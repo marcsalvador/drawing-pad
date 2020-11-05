@@ -243,6 +243,7 @@ export class DrawingPadComponent
     this.canvas.addEventListener('mousedown', (event) => { this.handleMouseDown(event); }, false);
     this.canvas.addEventListener('mouseup', (event) => { this.handleMouseUp(event); }, false);
     this.canvas.addEventListener('mousemove', (event) => { this.handleMouseMove(event); }, false);
+    this.canvas.addEventListener('mouseout', (event) => { this.handleMouseOut(event); }, false);
 
     this.canvas.addEventListener('touchstart', (event) => { this.handleTouchStart(event); }, false);
     this.canvas.addEventListener('touchend', (event) => { this.handleTouchEnd(event); }, false);
@@ -402,6 +403,11 @@ export class DrawingPadComponent
     event.preventDefault();
     this.mousePos = this.getMousePos(event);
     this.renderCanvas(event);
+  }
+
+  handleMouseOut(event: MouseEvent): void {
+    event.preventDefault();
+    this.writeHistory();
   }
   //#endregion
 
