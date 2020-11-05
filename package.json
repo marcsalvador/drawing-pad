@@ -7,7 +7,7 @@
     "start": "ng serve",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "ng build",
+    "build": "ng build --aot --prod --base-href 'https://marcsalvador.github.io/drawing-pad/'",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
